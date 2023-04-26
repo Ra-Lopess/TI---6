@@ -52,31 +52,61 @@
 
         <h1 class="title-emocao">Seu cachorro pode estar:</h1>
   
-        
-        <svg (mouseenter)="showImageHappy = true" (mouseleave)="showImageHappy = false" id="emocao" xmlns="http://www.w3.org/2000/svg" style="fill:#7ed957" version="1.0" viewBox="0 0 500 500"  width="60" height="60">
-          <path d="M250 343.8c-49.5 0-91.6-37-98-86-.7-5.3 3.1-10.1 8.3-10.8 5.3-.7 10.1 3.1 10.8 8.3 5.1 39.4 39 69.1 78.8 69.1s73.7-29.7 78.8-69.1c.7-5.3 5.5-9 10.8-8.3 5.3.7 9 5.5 8.3 10.8-6.2 49-48.3 86-97.8 86zM500 250C500 112.1 387.9 0 250 0S0 112.1 0 250s112.1 250 250 250 250-112.2 250-250zm-19.3 0c0 127.2-103.5 230.7-230.7 230.7-127.2 0-230.7-103.5-230.7-230.7C19.3 122.8 122.8 19.3 250 19.3c127.2 0 230.7 103.5 230.7 230.7zm-288.4-62.5v-48.1c0-9.3-7.6-16.8-16.8-16.8-9.3 0-16.8 7.6-16.8 16.8v48.1c0 9.3 7.6 16.8 16.8 16.8 9.3 0 16.8-7.5 16.8-16.8zm149 0v-48.1c0-9.3-7.6-16.8-16.8-16.8-9.3 0-16.8 7.6-16.8 16.8v48.1c0 9.3 7.6 16.8 16.8 16.8 9.3 0 16.8-7.5 16.8-16.8z"/>
-        </svg>
+        <!-- Quando a imagem não foi selecionada o programa permite passar pelas imagens de emoções -->
+        <div *ngIf="!url">
+          <svg (mouseenter)="showImageHappy = true; isHappy = true" (mouseleave)="showImageHappy = false; isHappy = false" id="emocao" xmlns="http://www.w3.org/2000/svg" style="fill:#7ed957" version="1.0" viewBox="0 0 500 500"  width="60" height="60">
+            <path d="M250 343.8c-49.5 0-91.6-37-98-86-.7-5.3 3.1-10.1 8.3-10.8 5.3-.7 10.1 3.1 10.8 8.3 5.1 39.4 39 69.1 78.8 69.1s73.7-29.7 78.8-69.1c.7-5.3 5.5-9 10.8-8.3 5.3.7 9 5.5 8.3 10.8-6.2 49-48.3 86-97.8 86zM500 250C500 112.1 387.9 0 250 0S0 112.1 0 250s112.1 250 250 250 250-112.2 250-250zm-19.3 0c0 127.2-103.5 230.7-230.7 230.7-127.2 0-230.7-103.5-230.7-230.7C19.3 122.8 122.8 19.3 250 19.3c127.2 0 230.7 103.5 230.7 230.7zm-288.4-62.5v-48.1c0-9.3-7.6-16.8-16.8-16.8-9.3 0-16.8 7.6-16.8 16.8v48.1c0 9.3 7.6 16.8 16.8 16.8 9.3 0 16.8-7.5 16.8-16.8zm149 0v-48.1c0-9.3-7.6-16.8-16.8-16.8-9.3 0-16.8 7.6-16.8 16.8v48.1c0 9.3 7.6 16.8 16.8 16.8 9.3 0 16.8-7.5 16.8-16.8z"/>
+          </svg>
+  
+          <img (mouseenter)="showImageSad = true; isSad = true" (mouseleave)="showImageSad = false; isSad = false" 
+            id="emocao"
+            width="60" 
+            height="60"
+            src="../assets/img/triste.png"
+          >
+  
+          <img (mouseenter)="showImageAngry = true; isAngry = true" (mouseleave)="showImageAngry = false; isAngry = false" 
+            id="emocao"
+            width="60" 
+            height="60"
+            src="../assets/img/raiva.png"
+          >
+  
+          <img (mouseenter)="showImageRelax = true; isRelax = true" (mouseleave)="showImageRelax = false; isRelax = false" 
+            id="emocao"
+            width="60" 
+            height="62"
+            src="../assets/img/relaxado.png"
+          >
+        </div>
 
-        <img (mouseenter)="showImageSad = true" (mouseleave)="showImageSad = false" 
-          id="emocao"
-          width="60" 
-          height="60"
-          src="../assets/img/triste.png"
-        >
-
-        <img (mouseenter)="showImageAngry = true" (mouseleave)="showImageAngry = false" 
-          id="emocao"
-          width="60" 
-          height="60"
-          src="../assets/img/raiva.png"
-        >
-
-        <img (mouseenter)="showImageRelax = true" (mouseleave)="showImageRelax = false" 
-          id="emocao"
-          width="60" 
-          height="62"
-          src="../assets/img/relaxado.png"
-        >
+        <!-- Depois que escolhe a imagem, a opção das emoções é bloqueada -->
+        <div *ngIf="url" class="block-button">
+          <svg id="emocao" xmlns="http://www.w3.org/2000/svg" style="fill:#7ed957" version="1.0" viewBox="0 0 500 500"  width="60" height="60">
+            <path d="M250 343.8c-49.5 0-91.6-37-98-86-.7-5.3 3.1-10.1 8.3-10.8 5.3-.7 10.1 3.1 10.8 8.3 5.1 39.4 39 69.1 78.8 69.1s73.7-29.7 78.8-69.1c.7-5.3 5.5-9 10.8-8.3 5.3.7 9 5.5 8.3 10.8-6.2 49-48.3 86-97.8 86zM500 250C500 112.1 387.9 0 250 0S0 112.1 0 250s112.1 250 250 250 250-112.2 250-250zm-19.3 0c0 127.2-103.5 230.7-230.7 230.7-127.2 0-230.7-103.5-230.7-230.7C19.3 122.8 122.8 19.3 250 19.3c127.2 0 230.7 103.5 230.7 230.7zm-288.4-62.5v-48.1c0-9.3-7.6-16.8-16.8-16.8-9.3 0-16.8 7.6-16.8 16.8v48.1c0 9.3 7.6 16.8 16.8 16.8 9.3 0 16.8-7.5 16.8-16.8zm149 0v-48.1c0-9.3-7.6-16.8-16.8-16.8-9.3 0-16.8 7.6-16.8 16.8v48.1c0 9.3 7.6 16.8 16.8 16.8 9.3 0 16.8-7.5 16.8-16.8z"/>
+          </svg>
+  
+          <img  
+            id="emocao"
+            width="60" 
+            height="60"
+            src="../assets/img/triste.png"
+          >
+  
+          <img 
+            id="emocao"
+            width="60" 
+            height="60"
+            src="../assets/img/raiva.png"
+          >
+  
+          <img 
+            id="emocao"
+            width="60" 
+            height="62"
+            src="../assets/img/relaxado.png"
+          >
+        </div>
         
 
         <p class="text-emocao">
@@ -89,7 +119,7 @@
 
     <div class="col-md-4 d-flex img">
       
-      <button class="w-100 rounded border-marrom botao" *ngIf="!showImageHappy && !showImageSad && !showImageAngry && !showImageRelax && !url"  (click)="uploader.click()">
+      <button class="w-100 rounded border-marrom botao" *ngIf="!showImageHappy && !showImageSad && !showImageAngry && !showImageRelax && !url && !imgSelected"  (click)="uploader.click()">
         <input 
           hidden 
           type="file" 
@@ -99,9 +129,25 @@
         <span class="title-img">
           Clique para selecionar a imagem do seu cachorrinho...
         </span>
+
       </button>
 
-      <img [src]="url" *ngIf="!showImageHappy && !showImageSad && !showImageAngry && !showImageRelax && url" class="rounded img-config">
+      <div *ngIf="imgSelected && url">
+
+        <div class="img-borda">
+          <img [src]="url"class="rounded img-config">
+
+        </div>
+
+        <button (click)="destroyImg()" class="button-8 btn-block" style="font-family: populaire; font-size: x-large; color: #804F3B; margin-top: 2%">
+          Quero escolher outra imagem!
+        </button>
+
+        <button (click)="postImg()" class="button-8 btn-block" style="font-family: populaire; font-size: x-large; color: #804F3B; margin-top: 2%">
+          Quero enviar esta imagem!
+        </button>
+
+      </div>
 
       <img class="rounded img-config"
         *ngIf="showImageHappy"
@@ -124,7 +170,11 @@
       />
     </div>
 
-
+    <h1 class="title-resultado d-flex" style="justify-content: center; margin-top: 3%;">Seu cachorro está...</h1>
+    <h1 *ngIf="isHappy && !isSad && !isAngry && !isRelax" class="title-resultado-feliz d-flex" style="justify-content: center;">Feliz!</h1>
+    <h1 *ngIf="!isHappy && isSad && !isAngry && !isRelax" class="title-resultado-triste d-flex" style="justify-content: center;">Triste!</h1>
+    <h1 *ngIf="!isHappy && !isSad && isAngry && !isRelax" class="title-resultado-raiva d-flex" style="justify-content: center;">Nervoso!</h1>
+    <h1 *ngIf="!isHappy && !isSad && !isAngry && isRelax" class="title-resultado-relaxado d-flex" style="justify-content: center;">Calmo!</h1>
     
 </div>
 

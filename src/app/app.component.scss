@@ -82,7 +82,44 @@ p {
 }
 
 .img-config {
-    max-width: 100%; height: auto
+  max-width: 100%; height: auto;
+}
+
+.img-borda {
+  background-image: repeating-linear-gradient(168deg, #804f3b, #804f3b 10px, transparent 10px, transparent 21px, #804f3b 21px), repeating-linear-gradient(258deg, #804f3b, #804f3b 10px, transparent 10px, transparent 21px, #804f3b 21px), repeating-linear-gradient(-12deg, #804f3b, #804f3b 10px, transparent 10px, transparent 21px, #804f3b 21px), repeating-linear-gradient(78deg, #804f3b, #804f3b 10px, transparent 10px, transparent 21px, #804f3b 21px);
+  background-size: 2px 100%, 100% 2px, 2px 100% , 100% 2px;
+  background-position: 0 0, 0 0, 100% 0, 0 100%;
+  background-repeat: no-repeat;
+}
+
+.block-button {
+  opacity: 0.5;
+}
+
+.close-img-button {
+  position: absolute !important;
+  bottom: 50%;
+  right: 50%;
+}
+
+.title-resultado {
+  font-family: populaire; font-size: 420%; color: #804F3B;
+}
+
+.title-resultado-feliz {
+  font-family: populaire; font-size: 380%; color: #7ED957;
+}
+
+.title-resultado-triste {
+  font-family: populaire; font-size: 380%; color: #0CC0DF;
+}
+
+.title-resultado-raiva {
+  font-family: populaire; font-size: 380%; color: #FF5757;
+}
+
+.title-resultado-relaxado {
+  font-family: populaire; font-size: 380%; color: #FFBD59;
 }
 
 // .imgFeliz {
@@ -90,3 +127,39 @@ p {
 //     max-width: 100%; height: auto;
 //     object-fit: cover;
 // }
+
+.button-8 {
+  background-color: #E6CCB2;
+  border-radius: 3px;
+  border: 1px solid #804F3B;
+  box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #39739d;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px .8em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+  transition: 0.4s;
+}
+
+.button-8:hover,
+.button-8:focus {
+  background-color: #cc9c88;
+  transition: 0.4s;
+}
+
+.button-8:active {
+  background-color: #E6CCB2;
+  box-shadow: none;
+  color: #cc9c88;
+}

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-root',
@@ -12,13 +13,25 @@ export class AppComponent {
   showImageSad: boolean;
   showImageAngry: boolean;
   showImageRelax: boolean;
+  showImageX: boolean;
+  isHappy: boolean;
+  isSad: boolean;
+  isAngry: boolean;
+  isRelax: boolean;
+  imgSelected: any;
   url: any;
 
-  constructor() {
+  constructor(/*private Http: HttpClient*/) {
     this.showImageHappy = false;
     this.showImageSad = false;
     this.showImageAngry = false;
     this.showImageRelax = false;
+    this.showImageX = false;
+    this.isHappy = false;
+    this.isSad = false;
+    this.isAngry = false;
+    this.isRelax = false;
+    this.imgSelected = false;
   }
   
   uploadFile($event:any) {
@@ -30,6 +43,16 @@ export class AppComponent {
     fileReader.onload = (e) => {
       this.url = fileReader.result; 
     }
+    this.imgSelected = true;
     return fileReader.readAsDataURL(file);
-}
+  }
+
+  destroyImg() {
+    this.url = null;
+    this.imgSelected = false;
+  }
+
+  postImg() {
+    // this.Http.post("CAMINHO API", {img:this.url}); // Mudar CAMINHO API!!!!!!!!!!!!!!!!!!!!!
+  }
 }
