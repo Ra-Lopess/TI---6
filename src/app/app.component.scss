@@ -1,0 +1,92 @@
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 8px 0;
+}
+
+p {
+  margin: 0;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  background-color: #E6CCB2;
+  color: white;
+  font-weight: 600;
+}
+
+.toolbar #paw-logo {
+  height: 40px;
+  margin: 0 30px;
+}
+
+.content {
+  display: flex;
+  margin: 140px 32px;
+  padding: 0 16px;
+}
+
+#emocao {
+  margin-right: 3%;
+  margin-top: 2%;
+}
+
+#emocao:hover {
+  opacity: 0.6;
+}
+
+.botao {
+  border-style: dashed !important;
+}
+
+.border-marrom {
+  border-color: #804F3B;
+}
+
+.title-logo {
+    font-family: populaire; font-size: xx-large; color: #804F3B;
+}
+
+.title-conteudo {
+    font-family: populaire; font-size: 500%; color: #804F3B;
+}
+
+.text-title {
+    font-family: light; font-size: x-large; color: #808080;
+}
+
+.title-emocao {
+    font-family: populaire; font-size: 350%; color: #cc9c88;
+}
+
+.text-emocao {
+    font-family: light; font-size: x-large; color: #808080; margin-top: 3%;
+}
+
+.title-img {
+    font-family: light; font-size: large; color: #808080;
+}
+
+.img-config {
+    max-width: 100%; height: auto
+}
+
+// .imgFeliz {
+//     background-image: url("../assets/img/d1.jpg") !important;
+//     max-width: 100%; height: auto;
+//     object-fit: cover;
+// }
