@@ -21,7 +21,7 @@ export class AppComponent {
   imgSelected: any;
   url: any;
 
-  constructor(/*private Http: HttpClient*/) {
+  constructor(private Http: HttpClient) {
     this.showImageHappy = false;
     this.showImageSad = false;
     this.showImageAngry = false;
@@ -33,7 +33,7 @@ export class AppComponent {
     this.isRelax = false;
     this.imgSelected = false;
   }
-  
+
   uploadFile($event:any) {
     this.uploadDocument($event.target.files[0]);
   }
@@ -41,7 +41,7 @@ export class AppComponent {
   uploadDocument(file:any) {
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
-      this.url = fileReader.result; 
+      this.url = fileReader.result;
     }
     this.imgSelected = true;
     return fileReader.readAsDataURL(file);
@@ -53,6 +53,23 @@ export class AppComponent {
   }
 
   postImg() {
-    // this.Http.post("CAMINHO API", {img:this.url}); // Mudar CAMINHO API!!!!!!!!!!!!!!!!!!!!!
+    let request = this.Http.post<String>("http://localhost:3056/cnn", {image:this.url});
+    request.subscribe((data => {
+      this.isHappy = false;
+      this.isSad = false;
+      this.isAngry = false;
+      this.isRelax = false;
+
+      if(data == 'sad')
+        this.isSad = true;
+      else if(data == 'relaxed')
+        this.isRelax = true;
+      else if(data == 'angry')
+        this.isAngry = true;
+      else if(data == 'happy')
+        this.isHappy = true;
+      else
+        console.log("Não é um Cachorro!")
+    }))
   }
 }
