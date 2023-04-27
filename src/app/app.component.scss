@@ -58,7 +58,8 @@ p {
 }
 
 .title-logo {
-    font-family: populaire; font-size: xx-large; color: #804F3B;
+    font-family: populaire; font-size: 220%; color: #804F3B;
+    margin-top: 0.5%;
 }
 
 .title-conteudo {
@@ -102,8 +103,9 @@ p {
   right: 50%;
 }
 
-.title-resultado {
+.resultado-title {
   font-family: populaire; font-size: 420%; color: #804F3B;
+  justify-content: center; margin-top: 3%;
 }
 
 .title-resultado-feliz {
@@ -120,6 +122,10 @@ p {
 
 .title-resultado-relaxado {
   font-family: populaire; font-size: 380%; color: #FFBD59;
+}
+
+.resultado-text {
+  justify-content: center; 
 }
 
 // .imgFeliz {
