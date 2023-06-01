@@ -19,7 +19,7 @@ export class AppComponent {
   isAngry: boolean;
   isRelax: boolean;
   imgSelected: any;
-  url: any;
+  url: any[];
 
   constructor(private Http: HttpClient) {
     this.showImageHappy = false;
@@ -32,23 +32,30 @@ export class AppComponent {
     this.isAngry = false;
     this.isRelax = false;
     this.imgSelected = false;
+    this.url = [];
   }
 
   uploadFile($event:any) {
-    this.uploadDocument($event.target.files[0]);
+    this.destroyImg();
+    for(let i = 0; i < $event.target.files.length; i++){
+      this.uploadDocument($event.target.files[i], i);
+    }
   }
 
-  uploadDocument(file:any) {
+  uploadDocument(file:any, i:number) {
     let fileReader = new FileReader();
+
     fileReader.onload = (e) => {
-      this.url = fileReader.result;
+      this.url[i] = fileReader.result;
+      console.log(this.url);
     }
+    
     this.imgSelected = true;
     return fileReader.readAsDataURL(file);
   }
 
   destroyImg() {
-    this.url = null;
+    this.url = [];
     this.imgSelected = false;
   }
 
