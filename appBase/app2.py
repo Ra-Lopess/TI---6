@@ -71,4 +71,8 @@ def predict_image():
         # cv2.waitKey(0)
     return "A"
 
-app.run(port=63000, host='localhost', debug=True)
+def application(environ, start_response):
+    status = '200 OK'
+    headers = [('Content-type', 'text/plain')]
+    start_response(status, headers)
+    return [b'Hello, World!']
