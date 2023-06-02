@@ -53,7 +53,7 @@ def index():
 def predict_image():
     json_data = request.get_json()
     imgs = json_data['images']
-
+    img_list = []
     for img in imgs:
         name = img['name']
         base64_data = img['data']
@@ -63,16 +63,12 @@ def predict_image():
         foto = cv2.imdecode(np_array, cv2.IMREAD_COLOR)
 
         new_np_array = np.asarray(cv2.resize(foto, img_size[0:2])[:, :, ::-1])
-        print(new_np_array)
-
+        # prediction = cnn_model.predict(new_np_array[None, ...])[0]
+        img_list.append(new_np_array)
         
-        # Process the image
-        # cv2.imshow("Imagem",foto)
-        # cv2.waitKey(0)
-    return "A"
+    predictions = classifyImages(img_list)
+    # emotions.append(class_names[np.argmax(prediction)])
+    print(predictions)
+    return predictions
 
-def application(environ, start_response):
-    status = '200 OK'
-    headers = [('Content-type', 'text/plain')]
-    start_response(status, headers)
-    return [b'Hello, World!']
+app.run(port=5000, host='localhost', debug=True)
