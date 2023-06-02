@@ -1,18 +1,45 @@
+#   base Imports
+import base64
+
+#   flask Imports
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
+
+#  cv2 Imports
 import cv2
-import base64
 import numpy as np
-import sys
 
-def image_to_base64():
-    image_path = 'C:/Users/USER/Desktop/clei.jpg'
-    with open(image_path, 'rb') as image_file:
-        image_data = image_file.read()
-        base64_data = base64.b64encode(image_data)
-        base64_string = base64_data.decode('utf-8')
-        return base64_string
+#   CNN imports
+import tensorflow as tf
+from tensorflow.keras.callbacks import ModelCheckpoint
+from tensorflow.keras.models import load_model
 
+#   paralelization imports
+from multiprocessing.pool import ThreadPool
+
+# OpenCV Param
+img_size = (192, 192, 3)
+
+# CNN Param
+tf.random.set_seed(42)
+class_names = ['angry', 'happy', 'relaxed', 'sad']
+cnn_model = load_model('cnn_model/model25')
+
+
+def classifyImage(dog_test_image):
+    prediction = cnn_model.predict(dog_test_image[None, ...])[0]
+    return class_names[np.argmax(prediction)]
+
+
+def classifyImages(img_list):
+    with ThreadPool(6) as p:
+        results = p.map(classifyImage, img_list)
+    return results
+
+
+
+
+# Flask Application
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 
@@ -29,22 +56,19 @@ def predict_image():
 
     for img in imgs:
         name = img['name']
-        
         base64_data = img['data']
-        print(name)
 
         image_data = base64.b64decode(base64_data.split(',')[1])
         np_array = np.frombuffer(image_data, np.uint8)
-        print("=================================\n")
-        print(np_array)
         foto = cv2.imdecode(np_array, cv2.IMREAD_COLOR)
+
+        new_np_array = np.asarray(cv2.resize(foto, img_size[0:2])[:, :, ::-1])
+        print(new_np_array)
+
         
         # Process the image
-        cv2.imshow("Imagem",foto)
-        cv2.waitKey(0)
+        # cv2.imshow("Imagem",foto)
+        # cv2.waitKey(0)
     return "A"
 
-app.run(port=5000, host='localhost', debug=True)
-
-# Example usage
-
+app.run(port=63000, host='localhost', debug=True)

@@ -19,13 +19,14 @@ import cv2
 # from random import randint
 
 from tensorflow.keras.models import load_model
-
-
-# from flask import Flask, jsonify, request
-
 from multiprocessing import Pool
-
 from datetime import datetime
+
+from flask import Flask, jsonify, request
+from flask_cors import CORS, cross_origin
+import cv2
+import base64
+import numpy as np
 
 
 
@@ -235,28 +236,36 @@ if __name__ == '__main__':
 
 
 
-# app = Flask(__name__)
+app = Flask(__name__)
+CORS(app, support_credentials=True)
 
-# @app.route('/cnn', methods=['POST'])
-# def predict_image():
-#     print('Foi!')
-#     file = request.files['image']
-#     print('Foi 2!')
-#     print(file)
-#     print('Foi 3!')
-#     img_array = np.fromstring(file.read(), np.uint8)
-#     print('Foi!')
-#     dog_test_image = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-#     print('Foi!')
-#     print(dog_test_image)
-#     print('Foi!')
-#     dog_test_image = np.asarray(cv2.resize(dog_test_image, img_size[0:2])[:, :, ::-1])
-#     prediction = cnn_model.predict(dog_test_image[None, ...])[0]
+@app.route('/')
+def index():
+    print("API no Ar!")
+    return "API no Ar!"
 
-#     return jsonify(f'IMAGE PREDICTION: {class_names[np.argmax(prediction)]}')
+@app.route('/cnn', methods=['POST'])
+@cross_origin(supports_credentials=True)
+def predict_image():
+    json_data = request.get_json()
+    imgs = json_data['images']
 
+    for img in imgs:
+        name = img['name']
+        
+        base64_data = img['data']
+        print(name)
 
-# app.run(port=5000, host='localhost', debug=True)
+        image_data = base64.b64decode(base64_data.split(',')[1])
+        np_array = np.frombuffer(image_data, np.uint8)
+        foto = cv2.imdecode(np_array, cv2.IMREAD_COLOR)
+        
+        # Process the image
+        # cv2.imshow("Imagem",foto)
+        # cv2.waitKey(0)
+    return "A"
+
+app.run(port=5000, host='localhost', debug=True)
 
 
 

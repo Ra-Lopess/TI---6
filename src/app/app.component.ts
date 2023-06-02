@@ -48,7 +48,7 @@ export class AppComponent {
 
     fileReader.onload = (e) => {
       this.url[i] = fileReader.result;
-      console.log(this.url);
+      // console.log(this.url);
     }
     
     this.imgSelected = true;
@@ -88,7 +88,7 @@ export class AppComponent {
     const images = []
     for(var i = 0; i < this.url.length; i++){
       var img = {name: `img${i}`, data: await this.convertToBase64(this.dataURLtoFile(this.url[i], "image"))};
-      console.log(img)
+      // console.log(img)
       images.push(img);
     }
 
