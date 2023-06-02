@@ -138,20 +138,20 @@
         <div>
           <div id="carouselExampleIndicators" class="carousel slide">
             <div class="carousel-inner">
-              <div *ngFor="let i of url;  first as isFirst">
-                <div class="carousel-item" [ngClass]="{'active':isFirst}">
+              <div>
+                <div *ngFor="let i of url; let indexOfelement=index;  first as isFirst;" class="carousel-item" [ngClass]="{'active':isFirst}">
                   <img [src]="i"class="rounded img-config d-block w-100" style="max-width: 100% !important; height: auto !important;">
+                  <button (click)="emotionsCateg(indexOfelement-1)" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button (click)="emotionsCateg(indexOfelement+1)" class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
                 </div>
               </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
           </div>
 
         </div>

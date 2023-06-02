@@ -15,6 +15,7 @@ export class AppComponent {
   showImageAngry: boolean;
   showImageRelax: boolean;
   showImageX: boolean;
+  emotions: any[]
   isHappy: boolean;
   isSad: boolean;
   isAngry: boolean;
@@ -28,6 +29,7 @@ export class AppComponent {
     this.showImageAngry = false;
     this.showImageRelax = false;
     this.showImageX = false;
+    this.emotions = [];
     this.isHappy = false;
     this.isSad = false;
     this.isAngry = false;
@@ -57,6 +59,7 @@ export class AppComponent {
 
   destroyImg() {
     this.url = [];
+    this.emotions = [];
     this.imgSelected = false;
   }
 
@@ -92,7 +95,7 @@ export class AppComponent {
       images.push(img);
     }
 
-    console.log(images)
+    // console.log(images)
     const requestData = JSON.stringify({images});
 
     axios.post('http://localhost:5000/cnn', requestData, {
@@ -101,11 +104,21 @@ export class AppComponent {
       },
     })
     .then(response => {
-      console.log(response);
+      this.emotions = response.data;
+      this.emotionsCateg(0)
     })
     .catch(error => {
       console.error(error);
     });
+  }
+
+  emotionsCateg(i:number){
+    if(i > this.emotions.length - 1)
+      i = 0
+    else if(i < 0)
+      i = this.emotions.length - 1
+
+    this.categ(this.emotions[i])
   }
 
   categ(response:string) {
